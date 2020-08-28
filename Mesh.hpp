@@ -22,6 +22,7 @@ public:
   std::vector<Vector2f>texCoord; 
 
   virtual bool intersect( const Ray& r , Hit& h , float tmin );
+  virtual float intersect_with_depth( const Ray& r , Hit& h , float tmin );
 private:
   void compute_norm();
 };

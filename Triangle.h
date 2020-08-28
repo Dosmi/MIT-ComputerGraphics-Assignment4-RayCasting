@@ -21,8 +21,14 @@ public:
 	}
 
 	virtual bool intersect( const Ray& ray,  Hit& hit , float tmin){
-		
+
 	}
+
+	virtual float intersect_with_depth( const Ray& r , Hit& h, float tmin)
+	{
+		std::cout << "in triangle iwd\n";
+	}
+
 	bool hasTex;
 	Vector3f normals[3];
 	Vector2f texCoords[3];

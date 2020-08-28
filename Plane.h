@@ -15,11 +15,13 @@ public:
 	}
 	~Plane(){}
 	virtual bool intersect( const Ray& r , Hit& h , float tmin){
-		
+
+	}
+	virtual float intersect_with_depth( const Ray& r , Hit& h, float tmin)
+	{
+		std::cout << "in plane iwd\n";
 	}
 
 protected:
 };
 #endif //PLANE_H
-		
-
