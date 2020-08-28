@@ -2,13 +2,15 @@
 #define VECTOR_2F_H
 
 #include <cmath>
-
+#include <string>
+#include <iomanip>
+#include <sstream>
 class Vector3f;
 
 class Vector2f
 {
 public:
-    
+
     static const Vector2f ZERO;
 	static const Vector2f UP;
 	static const Vector2f RIGHT;
@@ -50,9 +52,10 @@ public:
     void negate();
 
 	// ---- Utility ----
-    operator const float* () const; // automatic type conversion for OpenGL 
-    operator float* (); // automatic type conversion for OpenGL 
+    operator const float* () const; // automatic type conversion for OpenGL
+    operator float* (); // automatic type conversion for OpenGL
 	void print() const;
+  	std::string getprint() const;
 
 	Vector2f& operator += ( const Vector2f& v );
 	Vector2f& operator -= ( const Vector2f& v );

@@ -1,6 +1,8 @@
 #ifndef VECTOR_3F_H
 #define VECTOR_3F_H
-
+#include <string>
+#include <iomanip>
+#include <sstream>
 class Vector2f;
 
 class Vector3f
@@ -58,8 +60,9 @@ public:
 
 	// ---- Utility ----
     operator const float* () const; // automatic type conversion for OpenGL
-    operator float* (); // automatic type conversion for OpenGL 
-	void print() const;	
+    operator float* (); // automatic type conversion for OpenGL
+	void print() const;
+	std::string getprint() const;
 
 	Vector3f& operator += ( const Vector3f& v );
 	Vector3f& operator -= ( const Vector3f& v );
@@ -67,7 +70,7 @@ public:
 
     static float dot( const Vector3f& v0, const Vector3f& v1 );
 	static Vector3f cross( const Vector3f& v0, const Vector3f& v1 );
-    
+
     // computes the linear interpolation between v0 and v1 by alpha \in [0,1]
 	// returns v0 * ( 1 - alpha ) * v1 * alpha
 	static Vector3f lerp( const Vector3f& v0, const Vector3f& v1, float alpha );

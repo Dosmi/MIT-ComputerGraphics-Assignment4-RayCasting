@@ -203,6 +203,19 @@ void Vector3f::print() const
 		m_elements[0], m_elements[1], m_elements[2] );
 }
 
+// @implemented function that instead of printing the ...
+// vector elements, just returns a string of what is would print instead
+std::string Vector3f::getprint() const
+{
+  std::stringstream to_print;
+  // print vectors with 4 digit precision:
+  to_print << std::fixed << std::setprecision(4)
+           << "<" << m_elements[0]
+           << " " << m_elements[1]
+           << " " << m_elements[2] << ">";
+  return to_print.str();
+}
+
 Vector3f& Vector3f::operator += ( const Vector3f& v )
 {
 	m_elements[ 0 ] += v.m_elements[ 0 ];

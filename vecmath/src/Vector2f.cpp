@@ -3,6 +3,11 @@
 #include <cstdio>
 #include <cstdlib>
 
+// additional includes for debugging
+#include <string>
+#include <iomanip>
+#include <sstream>
+
 #include "Vector2f.h"
 #include "Vector3f.h"
 
@@ -70,7 +75,7 @@ float& Vector2f::y()
 float Vector2f::x() const
 {
     return m_elements[0];
-}	
+}
 
 float Vector2f::y() const
 {
@@ -145,6 +150,18 @@ void Vector2f::print() const
 {
 	printf( "< %.4f, %.4f >\n",
 		m_elements[0], m_elements[1] );
+}
+
+// @implemented function that instead of printing the ...
+// vector elements, just returns a string of what is would print instead
+std::string Vector2f::getprint() const
+{
+  std::stringstream to_print;
+  // print vectors with 4 digit precision:
+  to_print << std::fixed << std::setprecision(4)
+           << "<" << m_elements[0]
+           << " " << m_elements[1]  << ">";
+  return to_print.str();
 }
 
 Vector2f& Vector2f::operator += ( const Vector2f& v )
