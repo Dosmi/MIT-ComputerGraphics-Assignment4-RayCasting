@@ -27,6 +27,7 @@ public:
   ~Group()
   {}
 
+  // old intersect method:
   virtual bool intersect( const Ray& r , Hit& h , float tmin )
   {
     bool hit_object = false;
@@ -39,7 +40,17 @@ public:
     return hit_object;
   }
 
-  virtual float intersect_with_depth( const Ray& r , Hit& h , float tmin )
+  // wrapper function that intersects all group objects and returns:
+  // ... true - if tmin is not FLT_MAX (infinity)
+  // .. false - if tmin is FLT_MAX, meaning the ray did not hit ANY objects.
+  virtual bool intersect( const Ray& r , Hit& h , float tmin, Object3D*& closest_object )
+  {
+    float intersect_distance = this->intersect_with_depth(r, h, tmin, closest_object );
+    return (intersect_distance != FLT_MAX && !std::isnan(intersect_distance));
+  }
+
+
+  virtual float intersect_with_depth( const Ray& r , Hit& h , float tmin)
   {
     float min_depth = FLT_MAX;
     // dbug dvar(m_objects.size()) eol;
@@ -53,6 +64,27 @@ public:
       if ( depth != tmin && depth < min_depth)
       {
         min_depth = depth;
+      }
+    }
+    // dbug "returning " << dvar(min_depth) eol;
+    return min_depth;
+  }
+
+  virtual float intersect_with_depth( const Ray& r , Hit& h , float tmin, Object3D*& closest_object)
+  {
+    float min_depth = FLT_MAX;
+    // dbug dvar(m_objects.size()) eol;
+    for (Object3D* object : m_objects)
+    {
+      // dbug "callign " eol;
+      // if successful hit, and previously hadn't hadn't hit anything ...
+      // ... then raise the flag such that some object has been hit:
+      float depth = object->intersect_with_depth(r, h, tmin);
+      // dbug dvar(depth) eol;
+      if ( depth != tmin && depth < min_depth)
+      {
+        min_depth = depth;
+        closest_object = object;
         // dbug dvar(depth) eol;
       }
     }
