@@ -64,6 +64,7 @@ public:
 	static Matrix3f rotateZ( float radians );
 	static Matrix3f scaling( float sx, float sy, float sz );
 	static Matrix3f uniformScaling( float s );
+	static Matrix3f flip();
 	static Matrix3f rotation( const Vector3f& rDirection, float radians );
 
 	// Returns the rotation matrix represented by a unit quaternion

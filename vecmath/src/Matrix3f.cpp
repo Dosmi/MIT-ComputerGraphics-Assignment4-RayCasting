@@ -99,7 +99,7 @@ Vector3f Matrix3f::getCol( int j ) const
 	(
 		m_elements[ colStart ],
 		m_elements[ colStart + 1 ],
-		m_elements[ colStart + 2 ]			
+		m_elements[ colStart + 2 ]
 	);
 }
 
@@ -175,7 +175,7 @@ Matrix3f Matrix3f::inverse( bool* pbIsSingular, float epsilon ) const
 	float cofactor22 =  Matrix2f::determinant2x2( m00, m01, m10, m11 );
 
 	float determinant = m00 * cofactor00 + m01 * cofactor01 + m02 * cofactor02;
-	
+
 	bool isSingular = ( fabs( determinant ) < epsilon );
 	if( isSingular )
 	{
@@ -348,10 +348,21 @@ Matrix3f Matrix3f::uniformScaling( float s )
 }
 
 // static
+Matrix3f Matrix3f::flip()
+{
+	return Matrix3f
+	(
+		0, 0, 1,
+		0, 1, 0,
+		1, 0, 0
+	);
+}
+
+// static
 Matrix3f Matrix3f::rotation( const Vector3f& rDirection, float radians )
 {
 	Vector3f normalizedDirection = rDirection.normalized();
-	
+
 	float cosTheta = cos( radians );
 	float sinTheta = sin( radians );
 
