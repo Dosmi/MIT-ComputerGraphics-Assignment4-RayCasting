@@ -18,6 +18,11 @@ public:
 	this->material = material ;
 	}
 
+	Material* getMaterial() const
+	{
+			return material;
+	}
+
 	// object intersect returning either 'true' - for intersected or 'false' - not:
 	virtual bool intersect( const Ray& r , Hit& h, float tmin) = 0;
 	// object intersect returning the depth information:
