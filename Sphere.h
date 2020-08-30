@@ -80,7 +80,8 @@ public:
 					Material mat = Material( /*diffuseColor*/ Vector3f(1.));
 					h.set(/* t */ t,
 						    /* material */ &mat,
-								/* normal */ intersection / intersection.abs() );
+								// /* normal */ intersection / intersection.abs() );
+								/* normal */ intersection  / intersection.abs() * -1);
 				}
 				return true;
 		 }
@@ -134,15 +135,13 @@ public:
 		 		float negT = (-b - sqrt(discriminant)) / 2*a;
 				float t = (abs(posT) > abs(negT)) * posT + (abs(posT) < abs(negT)) * negT;
 
-				// dbug dvar(t) eol;
-
 				if ( ( t > tmin ) && ( t < h.getT() ) )
 				{
 					Vector3f intersection = r.getOrigin() + t * r.getDirection();
-					Material mat = Material( /*diffuseColor*/ Vector3f(1.));
+					// Material mat = Material( /*diffuseColor*/ Vector3f(1.));
 					h.set(/* t */ t,
-						    /* material */ &mat,
-								/* normal */ intersection / intersection.abs() );
+						    /* material */ material,
+								/* normal */ intersection  / intersection.abs() * -1 );
 				}
 				return t;
 		 }
