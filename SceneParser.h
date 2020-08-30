@@ -50,12 +50,17 @@ public:
     {
         return ambient_light;
     }
-    
+
     int getNumLights() const
     {
         return num_lights;
     }
-    
+
+    Light** getLights () const
+    {
+      return lights;
+    }
+
     Light* getLight( int i ) const
     {
         assert( i >= 0 && i < num_lights );
@@ -111,7 +116,7 @@ private:
     FILE* file;
     Camera* camera;
     Vector3f background_color;
-    Vector3f ambient_light;
+    Vector3f ambient_light; // ambient light color
     int num_lights;
     Light** lights;
     int num_materials;
